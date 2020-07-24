@@ -9,16 +9,16 @@
 
 // EXAMPLE SOLUTION CODE:
 class Airplane {
-  constructor(name) {
-    this.name = name;
-    this.isFlying = false;
-  }
-  takeOff() {
-    this.isFlying = true;
-  }
-  land() {
-    this.isFlying = false;
-  }
+    constructor(name) {
+        this.name = name;
+        this.isFlying = false;
+    }
+    takeOff() {
+        this.isFlying = true;
+    }
+    land() {
+        this.isFlying = false;
+    }
 }
 
 /*
@@ -39,9 +39,25 @@ class Airplane {
     - Give instances of Person a method `.toString()`:
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
-
 class Person {
-
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+        this.stomach = [];
+    }
+    poop() {
+        this.stomach = [];
+    }
+    eat(edible) {
+        if (this.stomach.length < 10) {
+            return this.stomach.push(edible);
+        } else {
+            return this.poop;
+        }
+    }
+    toString() {
+        return `${this.name}, ${this.age}`
+    }
 }
 
 /*
@@ -59,7 +75,27 @@ class Person {
 */
 
 class Car {
+    constructor(model, milesPerGallon) {
+        this.tank = 0;
+        this.odometer = 0;
+        this.model = model;
+        this.milesPerGallon = milesPerGallon;
+    }
+    fill(gallons) {
+        this.tank += gallons;
+    }
+    drive(distance) {
+        this.odometer += distance;
+        let fuel = this.tank * this.milesPerGallon;
+        fuel -= distance;
+        this.tank = fuel / this.milesPerGallon;
 
+        if (this.tank <= 0) {
+            this.odometer -= 1;
+            this.tank = 0;
+            return `I ran out of fuel at ${this.odometer} miles`;
+        }
+    }
 }
 
 /*
@@ -75,7 +111,14 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-
+    constructor(attributes) {
+        this.name = attributes.name;
+        this.age = attributes.age;
+        this.location = attributes.location;
+    }
+    speak() {
+        return `Hello, my name is ${this.name}, I am from ${this.location}`;
+    }
 }
 
 /*
@@ -92,9 +135,16 @@ class Lambdasian {
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
+class Instructor extends Lambdasian {
+    constructor(attributes) {
+        super(attributes)
+        this.specialty = attributes.specialty;
+        this.favLanguage = attributes.favLanguage;
+        this.catchPhrase = attributes.catchPhrase;
+    }
 
 }
+
 
 /*
   TASK 5
@@ -145,12 +195,12 @@ class ProjectManager {
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
 if (typeof exports !== 'undefined') {
-  module.exports = module.exports || {}
-  if (Airplane) { module.exports.Airplane = Airplane }
-  if (Person) { module.exports.Person = Person }
-  if (Car) { module.exports.Car = Car }
-  if (Lambdasian) { module.exports.Lambdasian = Lambdasian }
-  if (Instructor) { module.exports.Instructor = Instructor }
-  if (Student) { module.exports.Student = Student }
-  if (ProjectManager) { module.exports.ProjectManager = ProjectManager }
+    module.exports = module.exports || {}
+    if (Airplane) { module.exports.Airplane = Airplane }
+    if (Person) { module.exports.Person = Person }
+    if (Car) { module.exports.Car = Car }
+    if (Lambdasian) { module.exports.Lambdasian = Lambdasian }
+    if (Instructor) { module.exports.Instructor = Instructor }
+    if (Student) { module.exports.Student = Student }
+    if (ProjectManager) { module.exports.ProjectManager = ProjectManager }
 }
